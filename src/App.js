@@ -7,7 +7,7 @@ class App extends React.Component {
         this.state = {
             albumPicker: [],
             albums:[],
-            value:[]
+
 
         }
     }
@@ -22,8 +22,7 @@ class App extends React.Component {
     }
 
     optionHandler(event) {
-        this.setState({value:event.target.value})
-        fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${this.state.value}`)
+        fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${event.target.value}`)
             .then(res => res.json())
             .then(albums => {
                 this.setState({albums})
