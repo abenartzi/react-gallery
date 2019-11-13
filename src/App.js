@@ -47,7 +47,7 @@ class App extends React.Component {
             <div>
                 {this.state.albums.map(album => {
                     return(
-                        <img key={album.id} src={album.thumbnailUrl} alt="#"/>
+                        <img key={album.id} src={album.thumbnailUrl} alt={album.title}/>
                     )
 
                 })}
