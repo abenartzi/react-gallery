@@ -5,7 +5,9 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            albumPicker: []
+            albumPicker: [],
+            albums:[],
+            value:[]
 
         }
     }
@@ -15,6 +17,17 @@ class App extends React.Component {
             .then(res => res.json())
             .then(albumPicker => {
                 this.setState({albumPicker})
+                console.log(this.state.albumPicker)
+            })
+    }
+
+    optionHandler(event) {
+        this.setState({value:event.target.value})
+        fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${this.state.value}`)
+            .then(res => res.json())
+            .then(albums => {
+                this.setState({albums})
+                console.log(albums)
             })
     }
 
@@ -22,15 +35,25 @@ class App extends React.Component {
     return (
         <div className="App">
           <h1>Select an album:</h1>
-            <select name="" id="">
+            <select name="" id="" onChange={this.optionHandler.bind(this)}>
+                <option value="">Choose Album...</option>
                 {this.state.albumPicker.map(album =>{
                     return(
-                    <option key={album.id} value="album.id">{album.title}</option>
+                        // *what would be the best practice for value ?
+                    <option key={album.id} value={album.id}>{album.title}</option>
                     )
                 })}
-
-
             </select>
+
+            <div>
+                {this.state.albums.map(album => {
+                    return(
+                        <img key={album.id} src={album.thumbnailUrl} alt="#"/>
+                    )
+
+                })}
+
+            </div>
         </div>
     );
   }
