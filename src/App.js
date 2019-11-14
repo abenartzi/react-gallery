@@ -33,9 +33,9 @@ class App extends React.Component {
     render() {
     return (
         <div className="App">
-          <h1>Select an album:</h1>
+          <h1>Gallery App</h1>
             <select name="" id="" onChange={this.optionHandler.bind(this)}>
-                <option value="">Choose Album...</option>
+                <option value="">Choose Your Album...</option>
                 {this.state.albumPicker.map(album =>{
                     return(
                         // *what would be the best practice for value ?
@@ -47,7 +47,7 @@ class App extends React.Component {
             <div>
                 {this.state.albums.map(album => {
                     return(
-                        <img key={album.id} src={album.thumbnailUrl} alt={album.title}/>
+                       <a href={album.url}> <img key={album.id} src={album.thumbnailUrl} alt={album.title}/> </a>
                     )
 
                 })}
